@@ -1,0 +1,20 @@
+--- AbstractListCommandProxy.java	(revision 64112)
++++ AbstractListCommandProxy.java	(working copy)
+@@ -107,5 +107,6 @@
+         ActionReport subReport = null;
+         if (! preInvoke(context, actionReport)) {
+             commandsExitCode = ActionReport.ExitCode.FAILURE;
++            actionReport.setActionExitCode(commandsExitCode);
+             return;
+         }
+@@ -133,9 +134,9 @@
+                     postInvoke(context, subReport.getSubActionsReport().get(0));
+                 } else {
+                     actionReport.setMessage(subReport.getMessage());
+-                    commandsExitCode = subReport.getActionExitCode();
+                 }
+             }
++            commandsExitCode = subReport.getActionExitCode();
+         }
+         actionReport.setActionExitCode(commandsExitCode);
+     }
